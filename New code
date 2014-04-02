@@ -1,0 +1,81 @@
+print ("Mobile phone ticketing program!")
+print ("\n")
+entered_code = int(input("Enter passcode"))
+
+#variable for credit on phone
+credits = 6
+drivercode = 999
+single = 1
+ret = 2
+singleticket = 3
+returnticket = 5
+amount = 0
+
+ #topup function
+def topup():
+    amount = int(input("how much do you want to add?"))
+    print ("\n")
+    global credits
+    if amount + credits > 30:
+        print ("\n")
+        print ("too much credit, try again")
+        topup()
+    else:
+        credits = credits + amount
+        display_bal ()
+
+
+#display balance function
+def display_bal ():
+    global credits
+    print ("credits left " + str(credits))
+
+#display ticket display function
+
+def SINGLEdisplay_ticket ():
+    global ticket_type
+    global ticket_no
+    import time
+    cost = ticket_no * 3
+    print ("Type of journey: SINGLE " + " No. of passengers: " + " " + str(ticket_no) + " " + time.ctime() + " £ " + str(cost)) 
+
+def RETdisplay_ticket ():
+    global ticket_type
+    global ticket_no
+    import time
+    print ("Type of journey: RETURN " + " " + time.ctime() + "Cost: £5")
+
+#the program
+if entered_code != drivercode:
+    print ("Invalid - try again")
+    entered_code = int(input("Enter passcode"))
+        #what ticket type
+while entered_code == drivercode:
+    ticket_type = int(input ("Type 1 for single, 2 for return"))
+    if credits < 3:
+        print ("Not enough credits - top up balance")
+        topup ()
+#if single
+            #deduct 3 credits
+    if ticket_type == single:
+        ticket_no = int(input ("How many tickets?"))
+        credits = credits - singleticket * ticket_no
+        print ("single ticket issued")
+        display_bal ()
+        SINGLEdisplay_ticket ()
+#else if ticket is return
+            #deduct 5 credits
+    elif ticket_type == ret:
+        credits = credits - returnticket
+        print ("return ticket issued")
+        display_bal ()
+        RETdisplay_ticket ()
+    else:
+        print ("\n")
+        print("Please enter a valid number:")
+
+    
+
+#go to topup
+
+        
